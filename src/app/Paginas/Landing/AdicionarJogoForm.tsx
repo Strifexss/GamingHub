@@ -1,15 +1,20 @@
 import { Formulario } from "@/app/components/Formulario";
 import { HeaderSection } from "@/app/components/headerSection";
 import { X } from "lucide-react";
+import { SetStateAction } from "react";
 
-export default function AdicionarJogoForm() {
+interface Props {
+    showAddModal: React.Dispatch<SetStateAction<boolean>>
+}
+
+export default function AdicionarJogoForm({showAddModal}:Props) {
     return(
                 <Formulario.Wrapper>
                     <div className="w-full h-[2rem] flex justify-between">
                         <h1 className="text-white text-[1rem] font-semibold">
                             Adicionar Jogo
                         </h1>     
-                        <HeaderSection.Icon BackgroundColor="Azul" Icon={X}/>           
+                        <HeaderSection.Icon BackgroundColor="Azul" Icon={X} onClick={() => showAddModal(false)}/>           
                     </div>
                     <Formulario.Input Label="Jogo" Placeholder="Nome do jogo" Type="text"/>
                     <Formulario.Input Label="Descrição" Placeholder="Descrição do Jogo" Type="text"/>
