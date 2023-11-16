@@ -4,7 +4,7 @@ interface Props {
     Label?: string,
     Placeholder: string,
     Type: "text" | "password" | "number",
-    Register: UseFormRegisterReturn
+    Register?: UseFormRegisterReturn
 }
 
 export default function Input({Label, Placeholder, Type, Register}:Props) {

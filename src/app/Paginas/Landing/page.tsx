@@ -1,37 +1,18 @@
-import GamingWrapperLanding from "@/app/components/GamingWrapper/GamingWrapperLanding";
+import AdicionarJogoForm from "./AdicionarJogoForm";
+import GameSection from "./GameSection";
+import Header from "./Header";
 
 export default function Landing() {
     return(
-        <div className="w-screen h-screen flex bg-zinc-950 p-8 px-10 text-[0.8rem] md:text-[0.6rem] 2xl:text-[0.8rem] overflow-y-scroll">
-            <div className="w-full flex flex-wrap gap-4">
-
-            <GamingWrapperLanding 
-                Titulo="Final Fantasy 7 Remake" 
-                ImageSrc="https://psxbrasil.com.br/wp-content/uploads/2020/12/ff7r-art-tifa-1440x2560-1.jpg"
-                Nota={4}
-                />
-            <GamingWrapperLanding 
-                Titulo="Chrono Trigger" 
-                ImageSrc="https://e1.pxfuel.com/desktop-wallpaper/697/477/desktop-wallpaper-android-chrono-trigger-mobile-world-trigger-iphone.jpg"
-                Nota={5}
-                />
-            <GamingWrapperLanding 
-                Titulo="GTA V" 
-                ImageSrc="https://wallpapers.com/images/featured/gta-5-phone-2asv2cebtqhgtrw0.jpg"
-                Nota={4}
-                />
-            <GamingWrapperLanding 
-                Titulo="Pokemon Emerald" 
-                ImageSrc="https://pbs.twimg.com/media/FiQ4g6_WYAMe-py.jpg"
-                Nota={3}
-                />
-            <GamingWrapperLanding 
-                Titulo="Pokemon Fire Red" 
-                ImageSrc="https://i.pinimg.com/474x/3c/8f/e2/3c8fe2af4745ea79ef3ec3c19867e4e0.jpg"
-                Nota={5}
-                />
-
+        <div className="w-screen h-screen flex flex-col items-center bg-zinc-950 p-8 px-10 text-[0.8rem] md:text-[0.6rem] 2xl:text-[0.8rem] overflow-y-scroll gap-y-6">
+            <div className="w-full flex justify-center items-center md:justify-start md:items-center ">
+                <h1 className="text-white font-semibold text-[1.5rem] md:text-[1rem] 2xl:text-[1.5rem]">
+                    Jogos Zerados
+                </h1>
             </div>
+            <Header/>
+            <GameSection/>        
+            <AdicionarJogoForm/>
         </div>
     )
 }
