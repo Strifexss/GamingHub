@@ -6,10 +6,9 @@ export async function POST(req: NextRequest) {
     const body = await req.text()
     const parsedBody = await JSON.parse(body)
     const {Email, Password} = parsedBody
-
+    await client.connect()
     try {
         const result = await usuarios.findOne({ Email: Email, Password: Password });
-
         if (result) {
             return NextResponse.json(result);
         } else {

@@ -26,7 +26,7 @@ export default function LoginScreenForm() {
       try {
         const result: UserModel | null = await LoginUser({ Email: data.Email, Password: data.Password });
         if(result?.Email === data.Email && result.Password === data.Password) {
-            push("./Paginas/Registrar")
+            push("./Paginas/Landing")
         }
       } catch (error) {
         console.error("Erro ao fazer login:", error);

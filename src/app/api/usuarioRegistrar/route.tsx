@@ -6,7 +6,7 @@ export async function POST(req: NextRequest) {
     const body = await req.text()
     const parsedBody = await JSON.parse(body)
     const {Email, Password, Nome} = parsedBody
-
+    await client.connect()
     try {
         usuarios.insertOne({Email: Email, Password: Password, Nome: Nome})
 
