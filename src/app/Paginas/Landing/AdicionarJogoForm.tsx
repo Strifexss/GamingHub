@@ -1,26 +1,55 @@
 import { Formulario } from "@/app/components/Formulario";
 import { HeaderSection } from "@/app/components/headerSection";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { X } from "lucide-react";
 import { SetStateAction } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { GameAddSchema, GameAddSchemaType } from "@/app/Models/addGamesModel";
+import AddNewGame from "@/app/hooks/AddNewGame";
 
 interface Props {
     showAddModal: React.Dispatch<SetStateAction<boolean>>
 }
 
 export default function AdicionarJogoForm({showAddModal}:Props) {
+    
+    const {register, formState:{errors}, handleSubmit} = useForm({
+        mode: "all",
+        criteriaMode: "all",
+        defaultValues: {
+           Nome:"",
+           Descricao: "",
+           Genero: "",
+           Imagem: "",
+           Nota: 0
+        },
+        resolver: zodResolver(GameAddSchema)
+    })
+    
+        const submitGame: SubmitHandler<GameAddSchemaType> = (data) => {
+            AddNewGame(data)
+        }
+
     return(
-                <Formulario.Wrapper>
+                <Formulario.Wrapper 
+                onSubmit={handleSubmit(submitGame)}
+                >
                     <div className="w-full h-[2rem] flex justify-between">
                         <h1 className="text-white text-[1rem] font-semibold">
                             Adicionar Jogo
                         </h1>     
                         <HeaderSection.Icon BackgroundColor="Azul" Icon={X} onClick={() => showAddModal(false)}/>           
                     </div>
-                    <Formulario.Input Label="Jogo" Placeholder="Nome do jogo" Type="text"/>
-                    <Formulario.Input Label="Descrição" Placeholder="Descrição do Jogo" Type="text"/>
-                    <Formulario.Input Label="Genêro do Jogo" Placeholder="Genêro do jogo" Type="text"/>
-                    <Formulario.Input Label="Imagem do Jogo" Placeholder="Url da imagem" Type="text"/>
-                    <Formulario.Input Label="Nota" Placeholder="Nota do jogo" Type="number"/>
+                    <Formulario.Input Label="Jogo" Placeholder="Nome do jogo" Type="text" Register={register("Nome")}/>
+                        <Formulario.ErrorsForm message={errors.Nome?.message} show={errors.Nome}/>
+                    <Formulario.Input Label="Descrição" Placeholder="Descrição do Jogo" Type="text" Register={register("Descricao")} />
+                        <Formulario.ErrorsForm message={errors.Descricao?.message} show={errors.Descricao}/>
+                    <Formulario.Input Label="Genêro do Jogo" Placeholder="Genêro do jogo" Type="text" Register={register("Genero")}/>
+                        <Formulario.ErrorsForm message={errors.Genero?.message} show={errors.Genero}/>
+                    <Formulario.Input Label="Imagem do Jogo" Placeholder="Url da imagem" Type="text" Register={register("Imagem")}/>
+                        <Formulario.ErrorsForm message={errors.Imagem?.message} show={errors.Imagem}/>
+                    <Formulario.Input Label="Nota" Placeholder="Nota do jogo" Type="number" Register={register("Nota")}/>
+                        <Formulario.ErrorsForm message={errors.Nota?.message} show={errors.Nota}/>
                     <Formulario.ButtonForm Conteudo="Adicionar"/>
                 </Formulario.Wrapper>
     )

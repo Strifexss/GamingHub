@@ -17,8 +17,6 @@ export async function POST(req: NextRequest) {
     } catch (error) {
         console.error("Erro ao processar a requisição:", error);
         return NextResponse.json({ message: "Ocorreu um erro ao processar a requisicao" });
-    } finally {
-        client.close();
     }
 
 }

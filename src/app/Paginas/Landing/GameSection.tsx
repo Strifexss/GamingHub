@@ -1,7 +1,11 @@
 import GamingWrapperLanding from "@/app/components/GamingWrapper/GamingWrapperLanding";
-import AdicionarJogoForm from "./AdicionarJogoForm";
+import { GameAddSchemaType } from "@/app/Models/addGamesModel";
 
-export default function GameSection() {
+interface Props {
+    dataGames: GameAddSchemaType[]
+}
+
+export default function GameSection({dataGames}:Props) {
     return(
         <div className="w-full h-full flex flex-wrap gap-4">
             <GamingWrapperLanding 
@@ -29,7 +33,17 @@ export default function GameSection() {
                 ImageSrc="https://i.pinimg.com/474x/3c/8f/e2/3c8fe2af4745ea79ef3ec3c19867e4e0.jpg"
                 Nota={5}
                 />
-                
+                {
+                dataGames.map(x => {
+                    return(
+                        <GamingWrapperLanding key={x.Nome} 
+                        Titulo={x.Nome} 
+                        ImageSrc={x.Imagem}
+                        Nota={x.Nota}
+                        />
+                    )
+                })
+            }    
         </div>
     )
 }
