@@ -33,6 +33,6 @@ export async function POST(req: NextRequest) {
         });
     } catch (error) {
         console.error("Erro ao adicionar o jogo:", error);
-        return NextResponse.json({ message: "Ocorreu um erro ao adicionar o jogo" }, { status });
+        return NextResponse.json({ message: "Ocorreu um erro ao adicionar o jogo" });
     } 
 }
