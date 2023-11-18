@@ -4,7 +4,6 @@ import { client, queryListaDeJogos } from "../db";
 
 export async function POST(req: NextRequest) {
     let isConnected = false;
-    let status = 500; 
 
     try {
         if (!isConnected) {
@@ -25,7 +24,6 @@ export async function POST(req: NextRequest) {
             Nota,
         });
 
-        status = 200; 
 
         return NextResponse.json({
             message: `Jogo ${Nome} Adicionado com Sucesso`,
