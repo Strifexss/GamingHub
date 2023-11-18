@@ -34,22 +34,32 @@ export default function AdicionarJogoForm({showAddModal}:Props) {
                 <Formulario.Wrapper 
                 onSubmit={handleSubmit(submitGame)}
                 >
-                    <div className="w-full h-[2rem] flex justify-between">
+                <div className="w-full h-[2rem] flex justify-between">
                         <h1 className="text-white text-[1rem] font-semibold">
                             Adicionar Jogo
                         </h1>     
                         <HeaderSection.Icon BackgroundColor="Azul" Icon={X} onClick={() => showAddModal(false)}/>           
                     </div>
-                    <Formulario.Input Label="Jogo" Placeholder="Nome do jogo" Type="text" Register={register("Nome")}/>
+                    <div className="w-full">
+                        <Formulario.Input Label="Jogo" Placeholder="Nome do jogo" Type="text" Register={register("Nome")}/>
                         <Formulario.ErrorsForm message={errors.Nome?.message} show={errors.Nome}/>
-                    <Formulario.Input Label="Descrição" Placeholder="Descrição do Jogo" Type="text" Register={register("Descricao")} />
+                    </div>
+                    <div className="w-full">
+                        <Formulario.Input Label="Descrição" Placeholder="Descrição do Jogo" Type="text" Register={register("Descricao")} />
                         <Formulario.ErrorsForm message={errors.Descricao?.message} show={errors.Descricao}/>
-                    <Formulario.Input Label="Genêro do Jogo" Placeholder="Genêro do jogo" Type="text" Register={register("Genero")}/>
+                    </div>
+                    <div className="w-full">
+                        <Formulario.Input Label="Genêro do Jogo" Placeholder="Genêro do jogo" Type="text" Register={register("Genero")}/>
                         <Formulario.ErrorsForm message={errors.Genero?.message} show={errors.Genero}/>
-                    <Formulario.Input Label="Imagem do Jogo" Placeholder="Url da imagem" Type="text" Register={register("Imagem")}/>
+                    </div>
+                    <div className="w-full">
+                        <Formulario.Input Label="Imagem do Jogo" Placeholder="Url da imagem" Type="text" Register={register("Imagem")}/>
                         <Formulario.ErrorsForm message={errors.Imagem?.message} show={errors.Imagem}/>
-                    <Formulario.Input Label="Nota" Placeholder="Nota do jogo" Type="number" Register={register("Nota")}/>
+                    </div>
+                    <div className="w-full">
+                        <Formulario.Input Label="Nota" Placeholder="Nota do jogo" Type="number" Register={register("Nota")}/>
                         <Formulario.ErrorsForm message={errors.Nota?.message} show={errors.Nota}/>
+                    </div>
                     <Formulario.ButtonForm Conteudo="Adicionar"/>
                 </Formulario.Wrapper>
     )

@@ -10,7 +10,9 @@ export default function AddNewGame(data: GameAddSchemaType) {
         Nota: data.Nota
     }).then(result => {
         console.log(result)
+        window.alert("Jogo Adicionado")
     }).catch(error => {
+        window.alert("Erro ao adicionar o jogo")
         console.log(error)
     })
 }

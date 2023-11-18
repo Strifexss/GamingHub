@@ -4,10 +4,9 @@ import { client, queryListaDeJogos } from "../db";
 
 export async function POST(req: NextRequest) {
     let isConnected = false;
-    let status = 500; // Status de erro padrão
+    let status = 500; 
 
     try {
-        // Verifica se a conexão já está aberta antes de tentar conectar novamente
         if (!isConnected) {
             await client.connect();
             isConnected = true;
@@ -17,7 +16,6 @@ export async function POST(req: NextRequest) {
         const parsedBody = JSON.parse(body);
         const { Nome, Descricao, Genero, Imagem, Nota } = parsedBody;
 
-        // Valide e sanitize os dados antes de inseri-los no banco de dados (não mostrado no exemplo)
 
         const result = await queryListaDeJogos.insertOne({
             Nome,
@@ -27,7 +25,7 @@ export async function POST(req: NextRequest) {
             Nota,
         });
 
-        status = 200; // Atualiza o status para sucesso
+        status = 200; 
 
         return NextResponse.json({
             message: `Jogo ${Nome} Adicionado com Sucesso`,
@@ -36,10 +34,5 @@ export async function POST(req: NextRequest) {
     } catch (error) {
         console.error("Erro ao adicionar o jogo:", error);
         return NextResponse.json({ message: "Ocorreu um erro ao adicionar o jogo" }, { status });
-    } finally {
-        if (isConnected) {
-            await client.close();
-            isConnected = false;
-        }
-    }
+    } 
 }

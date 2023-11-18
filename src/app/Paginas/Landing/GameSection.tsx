@@ -1,11 +1,30 @@
 import GamingWrapperLanding from "@/app/components/GamingWrapper/GamingWrapperLanding";
+import FetchData from "@/app/hooks/FetchDataGames";
 import { GameAddSchemaType } from "@/app/Models/addGamesModel";
+import { useEffect, useState } from "react";
 
-interface Props {
-    dataGames: GameAddSchemaType[]
-}
+export default function GameSection() {
 
-export default function GameSection({dataGames}:Props) {
+    const [dataGames, setDataGames] = useState<GameAddSchemaType[]>([])
+
+
+    useEffect(() => {
+        const fetchDataGames = async () => {
+            try {
+                const data = await FetchData();
+                setDataGames(data);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        fetchDataGames();
+    }, []);
+
+    useEffect(() => {
+        console.log(dataGames)
+    },[dataGames])
+
     return(
         <div className="w-full h-full flex flex-wrap gap-4">
             <GamingWrapperLanding 
@@ -33,17 +52,9 @@ export default function GameSection({dataGames}:Props) {
                 ImageSrc="https://i.pinimg.com/474x/3c/8f/e2/3c8fe2af4745ea79ef3ec3c19867e4e0.jpg"
                 Nota={5}
                 />
-                {
-                dataGames.map(x => {
-                    return(
-                        <GamingWrapperLanding key={x.Nome} 
-                        Titulo={x.Nome} 
-                        ImageSrc={x.Imagem}
-                        Nota={x.Nota}
-                        />
-                    )
-                })
-            }    
+         {dataGames && Array.isArray(dataGames) && dataGames.map((x) => (
+         <GamingWrapperLanding key={x.Nome} Titulo={x.Nome} ImageSrc={x.Imagem} Nota={x.Nota} />
+))}
         </div>
     )
 }
