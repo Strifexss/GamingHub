@@ -5,7 +5,7 @@ import {setCookie, parseCookies, destroyCookie} from "nookies"
 
 export interface CreateContextProps {
     handleSetUserCredential: (Credential: UserModel) => void,
-    GetCookies: () => UserModel,
+    GetCookies: () => UserModel | undefined,
     DestroyAuthCookies: () => void,
 }
 
