@@ -23,10 +23,10 @@ export default function Landing() {
                 </h1>
             </div>
             <Header showAddModal={setShoAddModal}/>
-            <GameSection UserID={UserData._id}/>
+            <GameSection UserID={UserData?._id || ""}/>
             {
             showAddModal &&
-                <AdicionarJogoForm showAddModal={setShoAddModal} UserId={UserData._id}/>
+                <AdicionarJogoForm showAddModal={setShoAddModal} UserId={UserData?._id || ""}/>
             }        
         </div>
     )

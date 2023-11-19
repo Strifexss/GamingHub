@@ -27,11 +27,15 @@ export const AuthContextProvider = ({children}:AuthContextProviderProps) => {
     }
     
     const GetCookies = () => {
-        const Cookies = parseCookies()
-        const UserData =  JSON.parse(Cookies.UserData)
-        return UserData as UserModel
-    }
-
+        try {
+            const Cookies = parseCookies();
+            const UserData = JSON.parse(Cookies.UserData);
+            return UserData as UserModel;
+        } catch (error) {
+            console.error("Error while parsing cookies:", error);
+            return
+        }
+    };
     const DestroyAuthCookies = () => {
         destroyCookie(null, "UserData")
     }
