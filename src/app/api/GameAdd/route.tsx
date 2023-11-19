@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
 
         const body = await req.text();
         const parsedBody = JSON.parse(body);
-        const { Nome, Descricao, Genero, Imagem, Nota } = parsedBody;
+        const { Nome, Descricao, Genero, Imagem, Nota, UserId } = parsedBody;
 
 
         const result = await queryListaDeJogos.insertOne({
@@ -22,6 +22,7 @@ export async function POST(req: NextRequest) {
             Genero,
             Imagem,
             Nota,
+            UserId
         });
 
 

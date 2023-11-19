@@ -3,15 +3,19 @@ import FetchData from "@/app/hooks/FetchDataGames";
 import { GameAddSchemaType } from "@/app/Models/addGamesModel";
 import { useEffect, useState } from "react";
 
-export default function GameSection() {
+interface Props {
+    UserID: string
+}
+
+export default function GameSection({UserID}:Props) {
 
     const [dataGames, setDataGames] = useState<GameAddSchemaType[]>([])
 
 
-    useEffect(() => {
+  useEffect(() => {
         const fetchDataGames = async () => {
             try {
-                const data = await FetchData();
+                const data = await FetchData(UserID);
                 setDataGames(data);
             } catch (error) {
                 console.error("Error fetching data:", error);
@@ -23,7 +27,7 @@ export default function GameSection() {
 
     useEffect(() => {
         console.log(dataGames)
-    },[dataGames])
+    },[dataGames]) 
 
     return(
         <div className="w-full h-full flex flex-wrap gap-4">

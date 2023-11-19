@@ -1,0 +1,45 @@
+"use client"
+import UserModel from "@/app/Models/UserModel";
+import { createContext } from "react";
+import {setCookie, parseCookies, destroyCookie} from "nookies"
+
+export interface CreateContextProps {
+    handleSetUserCredential: (Credential: UserModel) => void,
+    GetCookies: () => UserModel,
+    DestroyAuthCookies: () => void,
+}
+
+interface AuthContextProviderProps {
+    children: React.ReactNode
+}
+
+export const AuthContext = createContext<CreateContextProps | null>(null)
+
+export const AuthContextProvider = ({children}:AuthContextProviderProps) => {
+    
+    
+    
+    const handleSetUserCredential = (Credential:UserModel) => {
+        setCookie(undefined, "UserData", JSON.stringify(Credential), {
+            maxAge: 60 * 60 * 24 * 30,
+            path: "/",
+        })
+    }
+    
+    const GetCookies = () => {
+        const Cookies = parseCookies()
+        const UserData =  JSON.parse(Cookies.UserData)
+        return UserData as UserModel
+    }
+
+    const DestroyAuthCookies = () => {
+        destroyCookie(null, "UserData")
+    }
+
+    return (
+        <AuthContext.Provider value={{handleSetUserCredential, GetCookies, DestroyAuthCookies}}>
+            {children}
+        </AuthContext.Provider>
+    )
+
+}

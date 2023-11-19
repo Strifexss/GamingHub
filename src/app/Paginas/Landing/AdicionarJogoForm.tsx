@@ -8,10 +8,11 @@ import { GameAddSchema, GameAddSchemaType } from "@/app/Models/addGamesModel";
 import AddNewGame from "@/app/hooks/AddNewGame";
 
 interface Props {
-    showAddModal: React.Dispatch<SetStateAction<boolean>>
+    showAddModal: React.Dispatch<SetStateAction<boolean>>,
+    UserId: string
 }
 
-export default function AdicionarJogoForm({showAddModal}:Props) {
+export default function AdicionarJogoForm({showAddModal, UserId}:Props) {
     
     const {register, formState:{errors}, handleSubmit} = useForm({
         mode: "all",
@@ -27,7 +28,7 @@ export default function AdicionarJogoForm({showAddModal}:Props) {
     })
     
         const submitGame: SubmitHandler<GameAddSchemaType> = (data) => {
-            AddNewGame(data)
+            AddNewGame({data, UserId})
         }
 
     return(

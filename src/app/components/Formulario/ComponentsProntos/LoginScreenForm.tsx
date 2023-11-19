@@ -7,10 +7,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import LoginUser from "@/app/hooks/LoginUser";
 import UserModel from "@/app/Models/UserModel";
 import { useRouter } from "next/navigation";
+import { useContext } from "react";
+import { AuthContext, CreateContextProps } from "@/app/Contexts/AuthContext";
 
 export default function LoginScreenForm() {
 
   const {push} = useRouter()
+  const {handleSetUserCredential} = useContext(AuthContext) as CreateContextProps
 
   const {register, handleSubmit, formState: {errors}} = useForm({
     mode: "all",
@@ -22,12 +25,15 @@ export default function LoginScreenForm() {
     }
   })
 
+  
+
   const usuarioLogin: SubmitHandler<LoginSchemaType> = async (data) => {
       try {
         const result: UserModel | null = await LoginUser({ Email: data.Email, Password: data.Password });
         if(result?.Email === data.Email && result.Password === data.Password) {
           window.alert("Usuario Encontrado, Logando")
-            push("./Paginas/Landing")
+          handleSetUserCredential(result)
+          push("./Paginas/Landing")
         }
         else {
           window.alert("Usuario não encontrado")

@@ -5,7 +5,7 @@ export const GameAddSchema = z.object({
     Descricao: z.string(),
     Genero: z.string(),
     Imagem: z.string().trim().url("Insira uma Url válida"),
-    Nota: z.coerce.number().min(1, "A nota minima é 1").max(5, "A nota máxima é 5")
+    Nota: z.coerce.number().min(1, "A nota minima é 1").max(5, "A nota máxima é 5"),
 })
 
 export type GameAddSchemaType = z.infer<typeof GameAddSchema>
